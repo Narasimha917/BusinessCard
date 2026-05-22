@@ -1,14 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const flipCardInner = document.querySelector('.flip-card-inner');
 
-    // Flip the card on click
+    // Safe Flipping mechanism on trigger event clicks
     flipCardInner.addEventListener('click', () => {
         const isFlipped = flipCardInner.style.transform === 'rotateY(180deg)';
         flipCardInner.style.transform = isFlipped ? 'rotateY(0deg)' : 'rotateY(180deg)';
     });
 
-    // Auto-flip after 10 seconds
+    // Auto-flip hint sequence for new viewers after 6 seconds instead of 10
     setTimeout(() => {
-        flipCardInner.style.transform = 'rotateY(180deg)';
-    }, 10000); // 10000 ms = 10 seconds
+        if (!flipCardInner.style.transform || flipCardInner.style.transform === 'rotateY(0deg)') {
+            flipCardInner.style.transform = 'rotateY(180deg)';
+        }
+    }, 6000);
 });
